@@ -23,7 +23,7 @@ function ssh_load_key() {
   local key=$1
   if [[ "$key" == "" ]]; then return; fi
   if ( ! ssh-add -l | grep -q $key ); then
-    ssh-add ~/.ssh/$key;
+    ssh-add -t 3600 ~/.ssh/$key;
   fi
 }
 
