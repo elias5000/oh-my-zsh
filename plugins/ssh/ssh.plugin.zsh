@@ -26,6 +26,10 @@ function ssh_load_key() {
     ssh-add -t 3600 ~/.ssh/$key;
   fi
 }
+function ssh_keys {
+  reply=($(find $HOME/.ssh -name id_\* -not -name \*.pub -exec basename {} \;))
+}
+compctl -K ssh_keys ssh_load_key
 
 ############################################################
 # Remove SSH key from agent
