@@ -21,9 +21,14 @@ compctl -k hosts ssh_rmhkey
 # Load SSH key into agent
 function ssh_load_key() {
   local key=$1
+
+  if [[ $SSH_AGENT_KEY_TTL == "" ]]; then
+    SSH_AGENT_KEY_TTL=900
+  fi
+
   if [[ "$key" == "" ]]; then return; fi
   if ( ! ssh-add -l | grep -q $key ); then
-    ssh-add -t 3600 ~/.ssh/$key;
+    ssh-add -t $SSH_AGENT_KEY_TTL ~/.ssh/$key;
   fi
 }
 function ssh_keys {
