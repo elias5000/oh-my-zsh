@@ -42,22 +42,30 @@ if (( CURRENT == 1 )); then
 fi
 
 case "$words[1]" in
-  clone|edit)
+  clone)
     _clouds_local_stacks
     _wanted local_stacks expl 'local stacks' compadd -a local_stacks
-  ;;
-  update)
-    _arguments '(-c)--create_missing[Create AWS stacks if the required sources exist locally]'
-    _clouds_local_stacks
-    _wanted local_stacks expl 'local stacks' compadd -a local_stacks
-  ;;
-  dump)
-    _arguments '(--all)--all[dump all stacks]'
-    _clouds_all_stacks
-    _wanted all_stacks expl 'all stacks' compadd -a all_stacks
   ;;
   delete)
+    _arguments \
+      '(-e)--events[Output events while waiting (implies --wait)]' \
+      '(-w)--wait[Wait until finished when committing (synchronous mode)]'
     _clouds_all_stacks
     _wanted all_stacks expl 'all stacks' compadd -a all_stacks
+  ;;
+  dump)
+    _arguments \
+      '--all[dump all stacks]'
+    _clouds_all_stacks
+    _wanted all_stacks expl 'all stacks' compadd -a all_stacks
+  ;;
+  update)
+    _arguments \
+      '(-a)--all[Update all the stacks within the current directory]' \
+      '(-c)--create_missing[Create AWS stacks if the required sources exist locally]' \
+      '(-e)--events[Output events while waiting (implies --wait)]' \
+      '(-w)--wait[Wait until finished (synchronous mode)]'
+    _clouds_local_stacks
+    _wanted local_stacks expl 'local stacks' compadd -a local_stacks
   ;;
 esac
