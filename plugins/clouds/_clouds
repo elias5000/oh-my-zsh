@@ -48,23 +48,52 @@ case "$words[1]" in
   ;;
   delete)
     _arguments \
-      '(-e)--events[Output events while waiting (implies --wait)]' \
-      '(-w)--wait[Wait until finished when committing (synchronous mode)]'
-    _clouds_all_stacks
-    _wanted all_stacks expl 'all stacks' compadd -a all_stacks
+      '(-h)--help[show this help message and exit]' \
+      '(-e)--events[display events while waiting for the deletion to complete (implies --wait)]' \
+      '(-w)--wait[wait for deletion to finish (synchronous mode)]'
+    _clouds_remote_stacks
+    _wanted remote_stacks expl 'remote stacks' compadd -a remote_stacks
+  ;;
+  describe)
+    _arguments \
+      '(-h)--help[show this help message and exit]' \
+      '(-j)--json[output as JSON]'
+    _clouds_remote_stacks
+    _wanted remote_stacks expl 'remote stacks' compadd -a remote_stacks
   ;;
   dump)
     _arguments \
-      '--all[dump all stacks]'
-    _clouds_all_stacks
-    _wanted all_stacks expl 'all stacks' compadd -a all_stacks
+      '(-h)--help[show this help message and exit]' \
+      '(-a)--all[dump all stacks]'
+    _clouds_remote_stacks
+    _wanted remote_stacks expl 'remote stacks' compadd -a remote_stacks
+  ;;
+  events)
+    _arguments \
+      '(-h)--help[show this help message and exit]'
+    _clouds_remote_stacks
+    _wanted remote_stacks expl 'remote stacks' compadd -a remote_stacks
+  ;;
+  format)
+    _arguments \
+      '(-h)--help[show this help message and exit]' \
+      '(-a)--all[reformat all stacks]' \
+      '(-p)--pipe[pipe mode - read template from stdin and output to stdout]'
+    _clouds_local_stacks
+    _wanted local_stacks expl 'local stacks' compadd -a local_stacks
+  ;;
+  list)
+    _arguments \
+      '(-h)--help[show this help message and exit]' \
+      '(-l)--local[list only local stacks]' \
+      '(-r)--remote[list only stacks in AWS]'
   ;;
   update)
     _arguments \
-      '(-a)--all[Update all the stacks within the current directory]' \
-      '(-c)--create_missing[Create AWS stacks if the required sources exist locally]' \
-      '(-e)--events[Output events while waiting (implies --wait)]' \
-      '(-w)--wait[Wait until finished (synchronous mode)]'
+      '(-h)--help[show this help message and exit]' \
+      '(-c)--create_missing[create stack in AWS if it does not exist]' \
+      '(-e)--events[display events while waiting for the update to complete (implies --wait)]' \
+      '(-w)--wait[wait for update to finish (synchronous mode)]'
     _clouds_local_stacks
     _wanted local_stacks expl 'local stacks' compadd -a local_stacks
   ;;
