@@ -32,7 +32,6 @@ local -a all_stacks local_stacks
 
 _arguments \
   '(-h)--help[show this help message and exit]' \
-  '(-d)--dry[dry-run: only state what would be done]' \
   '(-f)--force[force action]' \
   '*:: :->subcmds' && return 0
 
