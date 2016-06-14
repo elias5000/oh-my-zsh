@@ -69,7 +69,8 @@ case "$words[1]" in
   ;;
   events)
     _arguments \
-      '(-h)--help[show this help message and exit]'
+      '(-h)--help[show this help message and exit]' \
+      '(-f)--follow[output all events of a stack']'
     _clouds_remote_stacks
     _wanted remote_stacks expl 'remote stacks' compadd -a remote_stacks
   ;;
