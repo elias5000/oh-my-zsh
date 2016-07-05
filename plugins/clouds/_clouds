@@ -47,36 +47,33 @@ case "$words[1]" in
   ;;
   delete)
     _arguments \
-      '(-h)--help[show this help message and exit]' \
       '(-e)--events[display events while waiting for the deletion to complete (implies --wait)]' \
+      '(-f)--force[force deletion]' \
       '(-w)--wait[wait for deletion to finish (synchronous mode)]'
     _clouds_remote_stacks
     _wanted remote_stacks expl 'remote stacks' compadd -a remote_stacks
   ;;
   describe)
     _arguments \
-      '(-h)--help[show this help message and exit]' \
       '(-j)--json[output as JSON]'
     _clouds_remote_stacks
     _wanted remote_stacks expl 'remote stacks' compadd -a remote_stacks
   ;;
   dump)
     _arguments \
-      '(-h)--help[show this help message and exit]' \
-      '(-a)--all[dump all stacks]'
+      '(-a)--all[dump all stacks]' \
+      '(-f)--force[overwrite existing local stack]'
     _clouds_remote_stacks
     _wanted remote_stacks expl 'remote stacks' compadd -a remote_stacks
   ;;
   events)
     _arguments \
-      '(-h)--help[show this help message and exit]' \
       '(-f)--follow[output all events of a stack]'
     _clouds_remote_stacks
     _wanted remote_stacks expl 'remote stacks' compadd -a remote_stacks
   ;;
   format)
     _arguments \
-      '(-h)--help[show this help message and exit]' \
       '(-a)--all[reformat all stacks]' \
       '(-p)--pipe[pipe mode - read template from stdin and output to stdout]'
     _clouds_local_stacks
@@ -84,17 +81,20 @@ case "$words[1]" in
   ;;
   list)
     _arguments \
-      '(-h)--help[show this help message and exit]' \
       '(-l)--local[list only local stacks]' \
       '(-r)--remote[list only stacks in AWS]'
   ;;
   update)
     _arguments \
-      '(-h)--help[show this help message and exit]' \
       '(-c)--create_missing[create stack in AWS if it does not exist]' \
       '(-e)--events[display events while waiting for the update to complete (implies --wait)]' \
       '(-w)--wait[wait for update to finish (synchronous mode)]'
     _clouds_local_stacks
     _wanted local_stacks expl 'local stacks' compadd -a local_stacks
   ;;
+  validate)
+    _arguments \
+      '(-a)--all[validate all stacks]'
+    _clouds_local_stacks
+    _wanted local_stacks expl 'local stacks' compadd -a local_stacks
 esac
