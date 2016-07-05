@@ -25,6 +25,7 @@ _1st_arguments=(
   'format:normalize stack template(s) (for better diffs)'
   'list:list available stacks'
   'update:update stack in AWS'
+  'validate:validate stack template'
 )
 
 local expl
@@ -32,7 +33,6 @@ local -a all_stacks local_stacks
 
 _arguments \
   '(-h)--help[show this help message and exit]' \
-  '(-f)--force[force action]' \
   '*:: :->subcmds' && return 0
 
 if (( CURRENT == 1 )); then
